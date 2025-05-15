@@ -17,6 +17,7 @@
 
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const pc = require("picocolors");
 
 const folder = process.argv[2] ?? "./";
 
@@ -25,7 +26,7 @@ async function main(folder) {
   try {
     files = await fs.readdir(folder);
   } catch (error) {
-    console.log("Error al leer el directorio", error);
+    console.log(pc.red("Error al leer el directorio"), error);
     process.exit(1);
   }
 
@@ -51,6 +52,15 @@ async function main(folder) {
   filesInfo.forEach((fileInfo) => {
     console.log(fileInfo);
   });
+
+  // filesInfo.forEach((fileInfo) => {
+  //   console.log(
+  //     pc.green(fileInfo.name),
+  //     pc.blue(fileInfo.fileType),
+  //     pc.yellow(fileInfo.fileSize),
+  //     pc.red(fileInfo.fileModified)
+  //   );
+  // });
 }
 
 main(folder);
